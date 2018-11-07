@@ -1,0 +1,62 @@
+{strip}
+{if $page.id == projectfactoryViewHelper::SITE_PAGE_ID_INDEX}
+    {$slider = $wa->photos->photos("album/1", '1920x506')}
+    {if $slider}
+        <div id="home_top_slider_wrap" class="home_top_slider_wrap">
+            <div id="home_top_slider" class="home_top_slider owl-carousel">
+                {foreach $slider as $s}
+                    <div class="item {if $s.description}clickable{/if}" {if $s.description}onclick="document.location = '{$s.description}';"{/if} style="background-image: url('{$s.thumb_1920x506.url}')"></div>
+                {/foreach}
+            </div>
+        </div>
+    {/if}
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 no-pad col-xs-12 col-sm-12 heading-content elemnts-wrap wow">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                {$wa->block("block_ourservicestextindex")}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mid-widgets-serices col-xs-12 col-sm-12 col-md-12 col-lg-12 no-pad services-page">
+            <div class="container">
+                <div class="row">
+                    {$wa->block("block_ourservicesindex")}
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="no-pad icon-boxes-1">
+                    {$wa->block("block_advantagesindex")}
+                </div>
+            </div>
+        </div>
+        {include file="_news_and_medcenters.html"}
+    </div>
+{else}
+    <div id="blog-medium-left">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 side-bar-blog tabbable tabs-left">
+            {include file="`$wa->site->themePath('default')`/_services_and_feedback.html"}
+        </div>
+        <div class="medical-theme-block col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            {$wa->projectfactory->formatTextImages($page.content)}
+            {if $sub = $wa->site->pages($page.id)}
+                <ul class="ullist">
+                    {foreach $sub as $e}
+                        <li>
+                            <a href="{$wa_domain}/{$e.full_url}">{$e.name}</a>
+                        </li>
+                    {/foreach}
+                </ul>
+            {/if}
+        </div>
+    </div>
+{/if}
+{/strip}
